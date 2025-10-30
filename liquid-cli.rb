@@ -4,11 +4,11 @@ require 'json'
 require 'yaml'
 
 # CLI examples:
-# - From file: ruby liquid.rb -i template.liquid -e "{ 'count': 1337 }"
-# - From string: ruby liquid.rb -t "Hello {{ name }}" -e '{"name":"World"}'
+# - From file: ruby liquid-cli.rb -i template.liquid -e "{ 'count': 1337 }"
+# - From string: ruby liquid-cli.rb -t "Hello {{ name }}" -e '{"name":"World"}'
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: ruby liquid.rb (-i INPUT_FILE | -t TEMPLATE) -e JSON_ENV'
+  opts.banner = 'Usage: ruby liquid-cli.rb (-i INPUT_FILE | -t TEMPLATE) -e JSON_ENV'
   opts.on('-iFILE', '--input=FILE', 'Path to Liquid template file') { |v| options[:input] = v }
   opts.on('-tTEMPLATE', '--template=TEMPLATE', 'Liquid template string (alternative to -i)') { |v| options[:template] = v }
   opts.on('-eJSON', '--env=JSON', 'JSON (or YAML) of resolved variables') { |v| options[:env] = v }
