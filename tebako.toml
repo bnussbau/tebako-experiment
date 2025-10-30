@@ -1,0 +1,19 @@
+# Tebako packaging configuration
+# See: https://github.com/tamatebako/tebako
+
+[package]
+name = "liquid-cli"
+version = "0.1.0"
+# Entry point for the packaged executable
+entrypoint = "liquid.rb"
+# Optional: set to true to reduce binary size by stripping symbols (if supported)
+strip = true
+
+[includes]
+# Include any non-Ruby assets your app needs at runtime. Our CLI only needs the input file path,
+# so no embedded assets are necessary. Keep this list empty.
+paths = []
+
+[gems]
+# Bundle gems used by the script. Tebako will vendor gems resolved by Bundler.
+bundle = true

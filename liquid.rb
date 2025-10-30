@@ -3,11 +3,14 @@ require 'optparse'
 require 'json'
 require 'yaml'
 
-# CLI: ruby liquid.rb -i template.liquid -e "{ 'count': 1337 }"
+# CLI examples:
+# - From file: ruby liquid.rb -i template.liquid -e "{ 'count': 1337 }"
+# - From string: ruby liquid.rb -t "Hello {{ name }}" -e '{"name":"World"}'
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: ruby liquid.rb -i INPUT_FILE -e JSON_ENV'
+  opts.banner = 'Usage: ruby liquid.rb (-i INPUT_FILE | -t TEMPLATE) -e JSON_ENV'
   opts.on('-iFILE', '--input=FILE', 'Path to Liquid template file') { |v| options[:input] = v }
+  opts.on('-tTEMPLATE', '--template=TEMPLATE', 'Liquid template string (alternative to -i)') { |v| options[:template] = v }
   opts.on('-eJSON', '--env=JSON', 'JSON (or YAML) of resolved variables') { |v| options[:env] = v }
   opts.on('-h', '--help', 'Show help') do
     puts opts
@@ -15,12 +18,19 @@ OptionParser.new do |opts|
   end
 end.parse!(ARGV)
 
-if options[:input].nil? || options[:input].strip.empty?
-  warn 'Error: missing input template file (-i FILE)'
+# Validate that exactly one of -i/--input or -t/--template is provided
+input_provided = options[:input] && !options[:input].strip.empty?
+template_provided = options[:template] && !options[:template].strip.empty?
+
+if input_provided && template_provided
+  warn 'Error: provide either -i/--input or -t/--template, not both'
+  exit 1
+elsif !input_provided && !template_provided
+  warn 'Error: missing template. Provide -i FILE or -t TEMPLATE'
   exit 1
 end
 
-unless File.file?(options[:input])
+if input_provided && !File.file?(options[:input])
   warn "Error: input file not found: #{options[:input]}"
   exit 1
 end
@@ -59,7 +69,11 @@ end
 
 variables = deep_stringify_keys(variables)
 
-markup = File.read(options[:input])
+markup = if input_provided
+  File.read(options[:input])
+else
+  options[:template]
+end
 environment = TRMNL::Liquid.build_environment # same arguments as Liquid::Environment.build
 template = Liquid::Template.parse(markup, environment: environment)
 rendered = template.render(variables)
