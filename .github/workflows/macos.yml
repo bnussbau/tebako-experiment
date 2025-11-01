@@ -33,11 +33,11 @@ jobs:
       - name: Install gem
         run: gem install tebako
 
-      - name: Install dependencies
-        run: bundle install
-
       - name: Checkout sample
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: bundle install
 
       - name: Package
         run: |
