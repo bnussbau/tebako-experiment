@@ -6,7 +6,7 @@ COPY . /app
 
 RUN tebako press \
   --root=/app \
-  --entry-point=liquid-cli.rb \
+  --entry-point=trmnl-liquid-cli.rb \
   --output=/app/dist/liquid-cli \
   --Ruby=3.3.7
 

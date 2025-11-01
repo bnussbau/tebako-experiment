@@ -2,10 +2,10 @@
 # See: https://github.com/tamatebako/tebako
 
 [package]
-name = "liquid-cli"
-version = "0.1.0"
+name = "trmnl-liquid-cli"
+version = "0.2.1"
 # Entry point for the packaged executable
-entrypoint = "liquid.rb"
+entrypoint = "liquid-cli.rb"
 # Optional: set to true to reduce binary size by stripping symbols
 strip = true
 
