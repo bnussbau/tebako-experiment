@@ -46,6 +46,10 @@ jobs:
             --entry-point=trmnl-liquid-cli.rb \
             --output=liquid-cli \
             --Ruby=3.3.7
+          
+      - name: Verify build artifact
+        run: |
+          ./liquid-cli --template 'Hello {{ count | number_with_delimiter }} people!' -e '{"count":1337}'
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
