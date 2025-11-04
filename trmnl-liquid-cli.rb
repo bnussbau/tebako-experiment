@@ -75,5 +75,5 @@ environment = TRMNL::Liquid.build_environment # same arguments as Liquid::Enviro
 template = Liquid::Template.parse(markup, environment: environment)
 rendered = template.render(variables)
 
-printf rendered
+print rendered
 
