@@ -7,10 +7,10 @@ COPY . /app
 RUN tebako press \
   --root=/app \
   --entry-point=trmnl-liquid-cli.rb \
-  --output=/app/dist/liquid-cli \
+  --output=/app/dist/trmnl-liquid-cli \
   --Ruby=3.3.7
 
 FROM alpine:3.17 AS runtime
 WORKDIR /usr/local/bin
-COPY --from=builder /app/dist/liquid-cli /usr/local/bin/liquid-cli
-ENTRYPOINT ["/usr/local/bin/liquid-cli"]
+COPY --from=builder /app/dist/trmnl-liquid-cli /usr/local/bin/trmnl-liquid-cli
+ENTRYPOINT ["/usr/local/bin/trmnl-liquid-cli"]
