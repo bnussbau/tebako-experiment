@@ -1,0 +1,1 @@
+docker run --rm liquid-cli:latest --template '{% template say_hello %} &lt;h1&gt;Why hello there, {{ name }}!&lt;/h1&gt; {% endtemplate %} {% render &quot;say_hello&quot;, name: &quot;General Kenobi&quot; %}' -c '{"count":1337}'

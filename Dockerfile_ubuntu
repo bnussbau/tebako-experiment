@@ -1,4 +1,4 @@
-FROM ghcr.io/tamatebako/tebako-alpine-3.17:latest AS builder
+FROM ghcr.io/tamatebako/tebako-ubuntu-20.04:latest AS builder
 WORKDIR /app
 
 # Copy app sources
