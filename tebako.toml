@@ -3,7 +3,7 @@
 
 [package]
 name = "trmnl-liquid-cli"
-version = "0.2.1"
+version = "0.4.0"
 # Entry point for the packaged executable
 entrypoint = "trmnl-liquid-cli.rb"
 # Optional: set to true to reduce binary size by stripping symbols
